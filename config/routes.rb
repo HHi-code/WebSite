@@ -12,6 +12,24 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
 
+  # Catalog routes
+  resources :catalogs, only: [:create, :show] do
+    resources :elements, only: [:create, :show]
+  end
+
+  # TierLists
+  resources :tier_lists, only: [:index, :create, :show] do
+    # Сохранение распределения элементов по рангам редактора
+    resource :layout, only: [:update], controller: "tier_list_layouts"
+    # Создание, удаление и импорт элементов напрямую внутри тирлиста
+    resources :elements, only: [:create, :destroy], controller: "tier_list_elements" do
+      post :import, on: :collection
+    end
+  end
+
+  # Styleguide
+  get "/styleguide", to: "pages#styleguide"
+
   # Authentication routes
   get  "/signup", to: "registrations#new"
   post "/signup", to: "registrations#create"

@@ -1,26 +1,177 @@
-<div class="home-container">
-  <h1 class="home-title">MediaLibrary</h1>
+<div class="home-layout" data-controller="modal">
+  <!-- Основная область -->
+  <div class="home-main">
+    <% if logged_in? %>
+      <div class="catalogs-grid">
+        <!-- Карточка-кнопка "Создать каталог" -->
+        <button type="button" class="catalog-card catalog-card-add" data-action="modal#open">
+          <div class="catalog-add-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <span class="catalog-add-text">Создать каталог</span>
+        </button>
 
+        <% if @catalogs&.any? %>
+          <!-- Реальные каталоги пользователя -->
+          <% @catalogs.each do |catalog| %>
+            <%= render 'catalogs/catalog', catalog: catalog %>
+          <% end %>
+        <% else %>
+          <!-- Демонстрационные карточки для новых пользователей -->
+          <div class="catalog-card">
+            <div class="catalog-cover catalog-cover-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+            <div class="catalog-info">
+              <h3 class="catalog-title">Фильмы</h3>
+              <p class="catalog-desc">Коллекция любимых фильмов</p>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <div class="catalog-cover catalog-cover-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+              </svg>
+            </div>
+            <div class="catalog-info">
+              <h3 class="catalog-title">Музыка</h3>
+              <p class="catalog-desc">Альбомы и треки</p>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <div class="catalog-cover catalog-cover-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <div class="catalog-info">
+              <h3 class="catalog-title">Книги</h3>
+              <p class="catalog-desc">Прочитанные и запланированные</p>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <div class="catalog-cover catalog-cover-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                <path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path>
+              </svg>
+            </div>
+            <div class="catalog-info">
+              <h3 class="catalog-title">Игры</h3>
+              <p class="catalog-desc">Библиотека игр</p>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <div class="catalog-cover catalog-cover-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <div class="catalog-info">
+              <h3 class="catalog-title">Архив</h3>
+              <p class="catalog-desc">Разное</p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <!-- Для неавторизованных — форма регистрации -->
+      <div class="auth-box">
+        <h2 class="auth-title">Регистрация</h2>
+        <%= form_with model: @user || User.new, url: signup_path, class: "auth-form" do |f| %>
+          <div class="form-group">
+            <%= f.label :email, "Email" %>
+            <%= f.email_field :email, placeholder: "your@email.com", required: true, autofocus: true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password, "Пароль" %>
+            <%= f.password_field :password, placeholder: "Минимум 6 символов", required: true, minlength: 6 %>
+          </div>
+          <%= f.submit "Зарегистрироваться", class: "btn btn-primary btn-full" %>
+        <% end %>
+        <p class="auth-switch">Уже есть аккаунт? <%= link_to "Войти", login_path %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Sidebar -->
   <% if logged_in? %>
-    <div class="welcome-box">
-      <p class="welcome-text">Привет, <strong><%= current_user.email %></strong>!</p>
-      <%= button_to "Выйти", logout_path, method: :delete, class: "btn btn-outline" %>
-    </div>
-  <% else %>
-    <div class="auth-box">
-      <h2 class="auth-title">Регистрация</h2>
-      <%= form_with model: @user || User.new, url: signup_path, class: "auth-form" do |f| %>
-        <div class="form-group">
-          <%= f.label :email, "Email" %>
-          <%= f.email_field :email, placeholder: "your@email.com", required: true, autofocus: true %>
-        </div>
-        <div class="form-group">
-          <%= f.label :password, "Пароль" %>
-          <%= f.password_field :password, placeholder: "Минимум 6 символов", required: true, minlength: 6 %>
-        </div>
-        <%= f.submit "Зарегистрироваться", class: "btn btn-primary btn-full" %>
-      <% end %>
-      <p class="auth-switch">Уже есть аккаунт? <%= link_to "Войти", login_path %></p>
-    </div>
+    <%= render "shared/sidebar" %>
   <% end %>
+
+  <!-- Модальное окно создания каталога -->
+  <div class="modal-overlay" data-modal-target="overlay" data-action="click->modal#closeOnOverlay" style="display: none;">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title" data-modal-target="dialog">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title">Создать каталог</h2>
+        <button type="button" class="modal-close" data-action="modal#close" aria-label="Закрыть">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <p class="modal-subtitle">Создай собственное пространство для хранения и организации контента</p>
+
+      <%= form_with model: Catalog.new, url: catalogs_path, class: "modal-form", data: { action: "turbo:submit-start->modal#submitStart turbo:submit-end->modal#submitEnd" } do |f| %>
+        <div class="form-group">
+          <%= f.label :name, "Название каталога" %>
+          <%= f.text_field :name, placeholder: "Например, Любимые фильмы", required: true, maxlength: 60, data: { action: "input->modal#updatePreview", modal_target: "nameInput" } %>
+          <span class="char-counter"><span data-modal-target="charCounter">0</span>/60</span>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description, "Описание" %>
+          <%= f.text_area :description, placeholder: "Расскажи, что будет храниться в этом каталоге…", rows: 3, data: { action: "input->modal#updatePreview", modal_target: "descInput" } %>
+        </div>
+
+        <!-- Предпросмотр карточки -->
+        <div class="catalog-preview">
+          <div class="catalog-preview-cover">
+            <span class="catalog-preview-letter" data-modal-target="previewLetter">?</span>
+          </div>
+          <div class="catalog-preview-info">
+            <span class="catalog-preview-title" data-modal-target="previewTitle">Название каталога</span>
+            <span class="catalog-preview-desc" data-modal-target="previewDesc">Описание каталога</span>
+          </div>
+        </div>
+
+        <!-- Выбор цвета -->
+        <div class="form-group">
+          <%= f.label :border_color, "Цвет рамки" %>
+          <div class="color-picker">
+            <%= f.color_field :border_color, value: "#8B5CF6", data: { action: "input->modal#updatePreview" } %>
+            <div class="color-presets">
+              <button type="button" class="color-preset" style="--preset-color: #8B5CF6;" data-action="modal#setColor" data-color="#8B5CF6"></button>
+              <button type="button" class="color-preset" style="--preset-color: #EC4899;" data-action="modal#setColor" data-color="#EC4899"></button>
+              <button type="button" class="color-preset" style="--preset-color: #06B6D4;" data-action="modal#setColor" data-color="#06B6D4"></button>
+              <button type="button" class="color-preset" style="--preset-color: #10B981;" data-action="modal#setColor" data-color="#10B981"></button>
+              <button type="button" class="color-preset" style="--preset-color: #F59E0B;" data-action="modal#setColor" data-color="#F59E0B"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" data-action="modal#close">Отмена</button>
+          <%= f.submit "Создать каталог", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

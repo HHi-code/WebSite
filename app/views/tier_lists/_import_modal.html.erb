@@ -1,0 +1,17 @@
+<div class="modal-overlay" id="tier-import-modal" data-tier-list-target="importOverlay" data-action="click->tier-list#importModalCloseOnOverlay" style="display: none;">
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="tier-import-modal-title" data-tier-list-target="importDialog" data-action="click->tier-list#stopPropagation">
+    <div class="modal-header">
+      <h2 class="modal-title" id="tier-import-modal-title">Импорт из каталога</h2>
+      <button type="button" class="modal-close" data-action="tier-list#importModalClose" aria-label="Закрыть">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <p class="modal-subtitle">Выберите каталог, элементы которого будут добавлены в тирлист</p>
+
+    <%= render "tier_lists/import_modal_form", catalogs: current_user.catalogs %>
+
+  </div>
+</div>

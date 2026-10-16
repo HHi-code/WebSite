@@ -1,0 +1,25 @@
+<div id="tier-element-form">
+  <%= form_with model: element, url: tier_list_elements_path(@tier_list), class: "modal-form",
+                data: { action: "turbo:submit-start->modal#submitStart turbo:submit-end->tier-list#closeElementModal" } do |f| %>
+    <% if element.errors.any? %>
+      <div class="error-messages">
+        <ul>
+          <% element.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :title, "Название элемента" %>
+      <%= f.text_field :title, placeholder: "Например, Интерстеллар", required: true, maxlength: 100 %>
+      <span class="char-counter"><%= element.title.to_s.length %>/100</span>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-outline" data-action="modal#close">Отмена</button>
+      <%= f.submit "Создать", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,28 @@
+<div id="tier-import-form">
+  <%= form_with url: import_tier_list_elements_path(tier_list_id: @tier_list), method: :post,
+                data: { action: "turbo:submit-start->modal#submitStart turbo:submit-end->tier-list#importDone" } do |f| %>
+    <% if Array(@import_errors).any? %>
+      <div class="error-messages">
+        <ul>
+          <% Array(@import_errors).each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if catalogs.any? %>
+      <div class="form-group">
+        <%= f.label :catalog_id, "Каталог" %>
+        <%= f.select :catalog_id, options_from_collection_for_select(catalogs, :id, :name), { include_blank: "Выберите каталог" } %>
+      </div>
+    <% else %>
+      <p class="modal-empty">У вас пока нет каталогов для импорта.</p>
+    <% end %>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-outline" data-action="tier-list#importModalClose">Отмена</button>
+      <%= f.submit "Импортировать", class: "btn btn-primary", disabled: catalogs.none? %>
+    </div>
+  <% end %>
+</div>

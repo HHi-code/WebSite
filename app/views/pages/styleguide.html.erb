@@ -1,0 +1,204 @@
+<div class="styleguide-page">
+  <h1 class="page-title">Styleguide</h1>
+  <p class="styleguide-intro">Все UI-элементы MediaLibrary в одном месте</p>
+
+  <!-- Заголовки -->
+  <section class="styleguide-section">
+    <h2 class="styleguide-heading">Заголовки</h2>
+    <div class="styleguide-block">
+      <h1>Заголовок H1</h1>
+      <h2>Заголовок H2</h2>
+      <h3>Заголовок H3</h3>
+      <h4>Заголовок H4</h4>
+      <h5>Заголовок H5</h5>
+      <h6>Заголовок H6</h6>
+    </div>
+  </section>
+
+  <!-- Текст -->
+  <section class="styleguide-section">
+    <h2 class="styleguide-heading">Текст</h2>
+    <div class="styleguide-block">
+      <p>Обычный параграф текста. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p><a href="#">Обычная ссылка</a></p>
+      <p><small>Маленький текст (small)</small></p>
+      <p><strong>Жирный текст</strong> и <em>курсив</em></p>
+    </div>
+  </section>
+
+  <!-- Кнопки -->
+  <section class="styleguide-section">
+    <h2 class="styleguide-heading">Кнопки</h2>
+    <div class="styleguide-block styleguide-inline">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-outline">Outline</button>
+      <button class="btn btn-danger">Danger</button>
+      <button class="btn btn-primary" disabled>Disabled</button>
+      <button class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        С иконкой
+      </button>
+      <button class="btn btn-primary btn-full">Full Width</button>
+    </div>
+  </section>
+
+  <!-- Поля ввода -->
+  <section class="styleguide-section">
+    <h2 class="styleguide-heading">Поля ввода</h2>
+    <div class="styleguide-block">
+      <div class="form-group">
+        <label>Text</label>
+        <input type="text" placeholder="Текстовое поле">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Пароль">
+      </div>
+      <div class="form-group">
+        <label>Textarea</label>
+        <textarea rows="3" placeholder="Многострочный текст"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Select</label>
+        <select>
+          <option>Вариант 1</option>
+          <option>Вариант 2</option>
+          <option>Вариант 3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Checkbox</label>
+        <label class="checkbox-label"><input type="checkbox"> Чекбокс</label>
+      </div>
+      <div class="form-group">
+        <label>Radio</label>
+        <label class="checkbox-label"><input type="radio" name="radio"> Вариант 1</label>
+        <label class="checkbox-label"><input type="radio" name="radio"> Вариант 2</label>
+      </div>
+      <div class="form-group">
+        <label>File upload</label>
+        <input type="file">
+      </div>
+    </div>
+  </section>
+
+  <!-- Поля с ошибкой -->
+  <section class="styleguide-section">
+    <h2 class="styleguide-heading">Поля с ошибкой</h2>
+    <div class="styleguide-block">
+      <div class="form-group form-group-error">
+        <label>Email с ошибкой</label>
+        <input type="email" value="invalid-email" class="input-error">
+        <span class="error-text">Введите корректный email</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Карточки -->
+  <section class="styleguide-section">
+    <h2 class="styleguide-heading">Карточки</h2>
+    <div class="styleguide-block">
+      <div class="catalogs-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+        <div class="catalog-card">
+          <div class="catalog-cover catalog-cover-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+          </div>
+          <div class="catalog-info">
+            <h3 class="catalog-title">Карточка каталога</h3>
+            <p class="catalog-desc">Описание каталога</p>
+          </div>
+        </div>
+        <a href="#" class="catalog-card catalog-card-add">
+          <div class="catalog-add-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <span class="catalog-add-text">Создать</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Аватар -->
+  <section class="styleguide-section">
+    <h2 class="styleguide-heading">Аватар</h2>
+    <div class="styleguide-block styleguide-inline">
+      <div class="avatar">AB</div>
+      <div class="avatar avatar-small">CD</div>
+      <div class="avatar avatar-large">EF</div>
+    </div>
+  </section>
+
+  <!-- Бейджи -->
+  <section class="styleguide-section">
+    <h2 class="styleguide-heading">Бейджи / Теги</h2>
+    <div class="styleguide-block styleguide-inline">
+      <span class="badge">Фильмы</span>
+      <span class="badge badge-outline">Музыка</span>
+      <span class="badge badge-success">Книги</span>
+      <span class="badge badge-danger">Игры</span>
+    </div>
+  </section>
+
+  <!-- Цветовые переменные -->
+  <section class="styleguide-section">
+    <h2 class="styleguide-heading">Цветовые переменные</h2>
+    <div class="styleguide-block">
+      <div class="color-variables">
+        <div class="color-swatch">
+          <div class="color-swatch-box" style="background-color: #0F0D14;"></div>
+          <span class="color-swatch-label">--bg-primary: #0F0D14</span>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-box" style="background-color: #17141F;"></div>
+          <span class="color-swatch-label">--bg-secondary: #17141F</span>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-box" style="background-color: #1D1928;"></div>
+          <span class="color-swatch-label">--bg-card: #1D1928</span>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-box" style="background-color: #30283D;"></div>
+          <span class="color-swatch-label">--border: #30283D</span>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-box" style="background-color: #8B5CF6;"></div>
+          <span class="color-swatch-label">--accent: #8B5CF6</span>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-box" style="background-color: #A78BFA;"></div>
+          <span class="color-swatch-label">--accent-hover: #A78BFA</span>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-box" style="background-color: #F5F3FA;"></div>
+          <span class="color-swatch-label">--text-primary: #F5F3FA</span>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-box" style="background-color: #B0A9BF;"></div>
+          <span class="color-swatch-label">--text-secondary: #B0A9BF</span>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-box" style="background-color: #34D399;"></div>
+          <span class="color-swatch-label">--success: #34D399</span>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-box" style="background-color: #F87171;"></div>
+          <span class="color-swatch-label">--danger: #F87171</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

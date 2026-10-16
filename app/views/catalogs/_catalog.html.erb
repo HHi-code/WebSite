@@ -1,0 +1,11 @@
+<%= link_to catalog_path(catalog), class: "catalog-card", style: "border-color: #{catalog.border_color};" do %>
+  <div class="catalog-cover catalog-cover-placeholder catalog-cover-avatar">
+    <span class="catalog-cover-letter"><%= catalog.name[0..1].upcase %></span>
+  </div>
+  <div class="catalog-info">
+    <h3 class="catalog-title"><%= catalog.name %></h3>
+    <% if catalog.description.present? %>
+      <p class="catalog-desc"><%= catalog.description %></p>
+    <% end %>
+  </div>
+<% end %>

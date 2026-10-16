@@ -1,0 +1,72 @@
+<div class="home-layout" data-controller="modal">
+  <!-- Основная область -->
+  <div class="home-main">
+    <h1 class="page-title">Мои Тирлисты</h1>
+    <p class="page-subtitle">Создавай и ранжируй списки того, что любишь</p>
+
+    <div class="catalogs-grid">
+      <!-- Карточка-кнопка "Создать тирлист" -->
+      <button type="button" class="catalog-card catalog-card-add" data-action="modal#open">
+        <div class="catalog-add-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </div>
+        <span class="catalog-add-text">Создать тирлист</span>
+      </button>
+
+      <% @tier_lists.each do |tier_list| %>
+        <%= link_to tier_list_path(tier_list), class: "catalog-card" do %>
+          <div class="catalog-info">
+            <h3 class="catalog-title"><%= tier_list.title %></h3>
+            <% if tier_list.description.present? %>
+              <p class="catalog-desc"><%= tier_list.description.length > 60 ? "#{tier_list.description[0..59]}..." : tier_list.description %></p>
+            <% end %>
+            <p class="catalog-date"><%= tier_list.created_at.strftime("%d.%m.%Y") %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <% if @tier_lists.empty? %>
+      <p class="tier-lists-empty">У тебя пока нет тирлистов. Создай первый!</p>
+    <% end %>
+  </div>
+
+  <%= render "shared/sidebar" %>
+
+  <!-- Модальное окно создания тирлиста -->
+  <div class="modal-overlay" data-modal-target="overlay" data-action="click->modal#closeOnOverlay" style="display: none;">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="tierlist-modal-title" data-modal-target="dialog">
+      <div class="modal-header">
+        <h2 class="modal-title" id="tierlist-modal-title">Создать тирлист</h2>
+        <button type="button" class="modal-close" data-action="modal#close" aria-label="Закрыть">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <p class="modal-subtitle">Создай список для ранжирования того, что любишь</p>
+
+      <%= form_with model: TierList.new, url: tier_lists_path, class: "modal-form", data: { action: "turbo:submit-start->modal#submitStart turbo:submit-end->modal#submitEnd" } do |f| %>
+        <div class="form-group">
+          <%= f.label :title, "Название тирлиста" %>
+          <%= f.text_field :title, placeholder: "Например, Лучшие игры всех времён", required: true, maxlength: 100 %>
+          <span class="char-counter"><span data-modal-target="charCounter">0</span>/100</span>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description, "Описание" %>
+          <%= f.text_area :description, placeholder: "Опиши, что ты будешь ранжировать в этом тирлисте", rows: 3 %>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" data-action="modal#close">Отмена</button>
+          <%= f.submit "Создать тирлист", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

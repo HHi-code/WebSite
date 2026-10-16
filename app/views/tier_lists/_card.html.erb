@@ -1,0 +1,18 @@
+<div class="tier-card" data-tier-list-target="card" data-element-id="<%= element.id %>" title="<%= element.title %>">
+  <% if local_assigns.fetch(:show_delete, false) %>
+    <button type="button" class="tier-card-delete" data-action="click->tier-list#deleteElement" data-element-id="<%= element.id %>" title="Удалить элемент">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+      </svg>
+    </button>
+  <% end %>
+  <div class="tier-card-cover">
+    <% if element.image.attached? %>
+      <%= image_tag url_for(element.image), alt: element.title, class: "tier-card-img" %>
+    <% else %>
+      <span><%= element.title.to_s[0, 2].upcase %></span>
+    <% end %>
+  </div>
+  <span class="tier-card-title"><%= element.title %></span>
+</div>
