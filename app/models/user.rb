@@ -7,7 +7,9 @@ class User < ApplicationRecord
 
   # Все ID элементов пользователя: как из каталогов, так и созданные внутри тирлистов.
   def element_ids
-    Element.where(catalog_id: catalog_ids).or(Element.where(tier_list_id: tier_list_ids)).pluck(:id)
+    Element.where(catalog_id: catalog_ids)
+      .or(Element.where(id: TierListElement.where(tier_list_id: tier_list_ids).pluck(:element_id)))
+      .pluck(:id)
   end
 
   normalizes :email, with: ->(e) { e.strip.downcase }
